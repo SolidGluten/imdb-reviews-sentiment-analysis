@@ -23,6 +23,7 @@ Sentiment analysis on IMDb movie reviews
 9. Save to csv
 
 **SENTIMENT ANAYLSIS METHOD**
+
 Scenario 1
 - Model: Random Forest
 - Feature Extraction: TF-IDF
