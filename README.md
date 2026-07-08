@@ -17,7 +17,7 @@ Sentiment analysis on IMDb movie reviews
 
 4. Open inspector
 5. Right click <html> and copy InnerHTML
-6. Paste to .html file and save
+6. Paste to .html file and save to '/imdb_pages' folder
 7. Parse HTML file with BeautifulSoup4
 8. Get title, content, and rating from reviews
 9. Save to csv
