@@ -1,40 +1,46 @@
+# Sentiment Analysis Pipeline
 
-**GOAL**
-Sentiment analysis on IMDb movie reviews
+This project builds a sentiment analysis workflow for IMDb movie reviews, from data collection to model evaluation.
 
-**SCRAPING METHOD**
-1. Open IMDb review page (https://www.imdb.com/title/tt2527336/reviews/?ref_=tt_ururv_genai_sm)
-2. Press 'Show All' button to load all reviews
-3. Run command to open all spoilers
+## 1. Data Collection
+- The workflow starts with [scraper.ipynb](scraper.ipynb), which is used to gather IMDb review pages.
+- Review pages are stored in [imdb_pages](imdb_pages) as HTML files.
+- The scraper extracts review metadata such as title, content, and rating from each page.
 
-```
-    const spoilerButtons = document.querySelectorAll('.review-spoiler-button');
-    spoilerButtons.forEach(button => {
-        button.click();
-    });
-    console.log(`Clicked ${spoilerButtons.length} spoiler button(s).`);
-```
+## 2. Dataset Preparation
+- Extracted reviews are consolidated into [dataset/movie_reviews.csv](dataset/movie_reviews.csv).
+- The dataset is then prepared for training by cleaning the text and transforming it into model-ready features.
+- Labels are derived from review ratings to represent positive or negative sentiment.
 
-4. Open inspector
-5. Right click <html> and copy InnerHTML
-6. Paste to .html file and save to '/imdb_pages' folder
-7. Parse HTML file with BeautifulSoup4
-8. Get title, content, and rating from reviews
-9. Save to csv
+## 3. Feature Engineering
+- Text data is converted into numerical representations for classification.
+- Two common approaches are used in this project:
+  - TF-IDF for traditional machine learning models
+  - Word embeddings for deep learning models
 
-**SENTIMENT ANAYLSIS METHOD**
+## 4. Model Training
+The project experiments with three modeling approaches:
 
-Scenario 1
-- Model: Random Forest
-- Feature Extraction: TF-IDF
-- Training: 70/30
+1. Random Forest
+   - Uses TF-IDF features
+   - Trained with a 70/30 split
+   - Output: classification report, confusion matrix, and learning curve
 
-Scenario 2
-- Model: Support Vector Machine (SVM)
-- Feature Extraction: TF-IDF
-- Training: 80/20
+2. Support Vector Machine (SVM)
+   - Uses TF-IDF features
+   - Trained with an 80/20 split
+   - Output: classification report, confusion matrix, and learning curve
 
-Scenario 3
-- Model: Deep Learning (LTSM)
-- Feature Extraction: Word2Vec
-- Training: 70/30
+3. Deep Learning (LSTM)
+   - Uses Word2Vec-based representations
+   - Trained with a 70/30 split
+   - Output: confusion matrix, accuracy/loss curves, and best-epoch selection
+
+## 5. Evaluation and Comparison
+- Each model is evaluated on test data using classification metrics.
+- Results are compared to determine which approach performs best for this dataset.
+- The trained experiments are organized in the [models](models) directory.
+
+## 6. Output
+- Final outputs include the prepared dataset, trained models, and evaluation results.
+- The repository structure supports repeatable experimentation and future model improvements.
